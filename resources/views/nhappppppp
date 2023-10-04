@@ -1,0 +1,119 @@
+
+                                        @if(isset($results) && !$results->isEmpty())
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="box">
+                                                        <div class="box-head">
+                                                            <h3 class="head-title">Kết quả tìm kiếm cho "{{ request('s') }}"</h3>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="row">
+                                                                <!-- product -->
+                                                                @foreach($results as $sanpham)
+                                                                <div class="clear_ col-xs-12 col-sm-12 col-md-6 col-lg-6 product type-product post-206 status-publish first instock product_cat-ca-phe-cam-hung product_cat-ca-phe-pha-viet product_cat-ca-phe-the-gioi product_cat-do-uong has-post-thumbnail shipping-taxable purchasable product-type-simple">
+                                                                    <div class="wrp_item_small">
+                                                                        <div class="product-box product_grid_2">
+                                                                            <div class="product_mini_2 clearfix  ">
+                                                                                <div class="img_product">
+                                                                                    <a class="product-img" href="https://at08.mediawz.com/san-pham/ca-phe-americano/" title="Cà phê Americano">
+                                                                                        <img width="150" height="150" src="https://at08.mediawz.com/wp-content/uploads/2020/06/p-8-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Cà phê Americano" srcset="https://at08.mediawz.com/wp-content/uploads/2020/06/p-8-150x150.jpg 150w, https://at08.mediawz.com/wp-content/uploads/2020/06/p-8-300x300.jpg 300w, https://at08.mediawz.com/wp-content/uploads/2020/06/p-8-100x100.jpg 100w, https://at08.mediawz.com/wp-content/uploads/2020/06/p-8.jpg 600w" sizes="100vw" />
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="product-info">
+                                                                                    <div class="infor_prd">
+                                                                                        <h3 class="name_product">
+                                                                                            <a href="{{ route('show', ['id' => $sanpham->id]) }}" class="product-name">
+                                                                                                <span class="name_product">{{$sanpham->name}}</span>
+                                                                                            </a>
+                                                                                        </h3>
+                                                                                    </div>
+                                                                                    <div class="price_base ">
+                                                                                        <div class="price-box clearfix">
+                                                                                            <div class="special-price"> <span class="price product-price"><span class="woocommerce-Price-amount amount">{{$sanpham->giatien}}&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></span> </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="summary_grid">
+                                                                                        <div class="rte description text2line">
+                                                                                            {{$sanpham->mota}}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @endforeach
+                                                                <!-- /.product -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <p>Không tìm thấy kết quả nào.</p>
+                                        @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <tbody>
+                                            @php
+                                            $totalPrice = 0; // Khai báo biến tổng tiền và gán giá trị ban đầu bằng 0
+                                            @endphp
+                                            @isset($cart)
+                                            @foreach($cart->items as $id => $product)
+                                            <tr>
+                                                <td>
+                                                    <div class="product-title item-center">
+                                                        <img src="/images/{{$product['item']->image}}" alt="">
+                                                        <div>
+                                                            <p>{{$product['item']->name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="item-center">{{$product['item']->giatien}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="item-center">
+                                                        <div class="quantity">
+                                                            <input type="number" max="10" min="1" name="quantity" value="{{$product['qty']}}" class="quantity-input" id="quantity-input">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="item-center text-red">{{$product['qty'] * $product['item']->giatien}}</div>
+                                                </td>
+                            
+                                                <td class="product-remove">
+                                                <a href="{{route('banhang.xoagiohang', ['id' => $product['item']->id])}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+                            
+                                                </td>
+                                                @php
+                                                $totalPrice += $product['qty'] * $product['price']; // Cộng dồn giá tiền vào biến tổng tiền
+                                                @endphp
+                                            </tr>
+                                            @endforeach
+                            
+                                            @endisset
+                                        </tbody>
