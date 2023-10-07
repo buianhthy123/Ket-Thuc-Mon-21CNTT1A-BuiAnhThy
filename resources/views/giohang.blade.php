@@ -60,11 +60,9 @@
 							</td>
 
 						<td class="product-subtotal" data-title="Tạm tính">
-							<span class="woocommerce-Price-amount amount">{{$product['qty'] * $product['item']->giatien}}&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>						</td>
+							<span class="woocommerce-Price-amount amount">{{$product['qty'] * $product['price']}}&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>						</td>
 					</tr>
-					@php
-                    $totalPrice += $product['qty'] * $product['item']->giatien; // Cộng dồn giá tiền vào biến tổng tiền
-                    @endphp
+	
 					@endforeach
 
 			@endisset		

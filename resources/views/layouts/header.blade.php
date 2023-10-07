@@ -59,7 +59,7 @@
                                         <ul id="right-menu" class="item_big nav-right hidden-xs hidden-sm menu">
                                             <li id="menu-item-172" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-172 nav-item "><a href="https://at08.mediawz.com/chuyen-muc/dich-vu/">Dịch vụ</a></li>
                                             <li id="menu-item-170" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170 nav-item "><a href="https://at08.mediawz.com/tin-tuc/">Tin tức</a></li>
-                                            <li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169 nav-item "><a href="{{route('getInputLienhe')}}">Liên hệ</a></li>
+                                            <li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169 nav-item "><a href="{{route('lienhe')}}">Liên hệ</a></li>
                                         </ul>
                                         <!-- Cartgroup -->
                                         <div class="cartgroup">

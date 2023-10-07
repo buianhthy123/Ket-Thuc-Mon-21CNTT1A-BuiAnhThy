@@ -20,7 +20,7 @@ class Cart extends Model
 
 	//thêm 1 mặt hàng item có id cụ thể vào giỏ hàng
 	public function add($item, $id){
-		$mathang = ['qty'=>0, 'price' => $item->promotion_price==0?$item->unit_price:$item->promotion_price, 'item' => $item];
+		$mathang = ['qty'=>0, 'price' => $item->giamgia==0?$item->giatien:$item->giamgia, 'item' => $item];
 		//$mathang: lưu số lượng, tổng tiền của 1 item (mặt hàng) trong giỏ hàng
 		//qty: số lượng của 1 item (mặt hàng) trong giỏ hàng
 		//price: tổng tiền của 1 item (mặt hàng) trong giỏ hàng
@@ -31,14 +31,15 @@ class Cart extends Model
 			}
 		}
 		$mathang['qty']++;  //tăng số lượng của item vừa thêm lên 1
-		$mathang['price'] = $item->promotion_price==0?$item->unit_price:$item->promotion_price * $mathang['qty'];
+		$mathang['price'] = $item->giamgia==0?$item->giatien:$item->giamgia * $mathang['qty'];
 		$this->items[$id] = $mathang;
 		$this->totalQty++;
-		$this->totalPrice += ($item->promotion_price==0?$item->unit_price:$item->promotion_price);
+		$this->totalPrice += ($item->giamgia==0?$item->giatien:$item->giamgia);
+		$this->items[$id]['name'] = $item->name; // thêm dòng này để in ra tên sản phẩm
 	}
 	//thêm nhiều mặt hàng item có số lượng soluong có id cụ thể vào giỏ hàng
 	public function addMany($item, $id,$soluong){
-		$mathang = ['qty'=>0, 'price' => $item->promotion_price==0?$item->unit_price:$item->promotion_price, 'item' => $item];
+		$mathang = ['qty'=>0, 'price' => $item->giamgia==0?$item->giatien:$item->giamgia, 'item' => $item];
 		//$mathang: lưu số lượng, tổng tiền của 1 item (mặt hàng) trong giỏ hàng
 		//qty: số lượng của 1 item (mặt hàng) trong giỏ hàng
 		//price: tổng tiền của 1 item (mặt hàng) trong giỏ hàng
@@ -49,10 +50,11 @@ class Cart extends Model
 			}
 		}
 		$mathang['qty']=$mathang['qty']+$soluong;  //tăng số lượng của item vừa thêm lên số lượng
-		$mathang['price'] = ($item->promotion_price==0?$item->unit_price:$item->promotion_price) * $mathang['qty'];
+		$mathang['price'] = ($item->giamgia==0?$item->giatien:$item->giamgia) * $mathang['qty'];
 		$this->items[$id] = $mathang;
 		$this->totalQty +=$soluong;
-		$this->totalPrice += ($item->promotion_price==0?$item->unit_price:$item->promotion_price) * $soluong;
+		$this->totalPrice += ($item->giamgia==0?$item->giatien:$item->giamgia) * $soluong;
+		$this->items[$id]['name'] = $item->name; // thêm dòng này để in ra tên sản phẩm
 	}
 	//xóa 1
 	public function reduceByOne($id){

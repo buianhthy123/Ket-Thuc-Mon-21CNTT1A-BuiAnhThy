@@ -100,10 +100,6 @@
 															<span class="woocommerce-Price-amount amount">{{$product['qty'] * $product['item']->giatien}} <span class="woocommerce-Price-currencySymbol">&#8363;</span></span>
 														</td>
 													</tr>
-																	@php
-																		$totalPrice += $product['qty'] * $product['item']->giatien; // Cộng dồn giá tiền vào biến tổng tiền
-																	@endphp
-												
 													@endforeach
 													@endisset
 												</tbody>

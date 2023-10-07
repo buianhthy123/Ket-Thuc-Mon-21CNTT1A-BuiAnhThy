@@ -22,7 +22,7 @@ use App\Http\Middleware\AdminLoginMiddleware;
 |
 */
 Route::get('/c', function () {
-    return view('account');
+    return view('admin/test/test');
 });
 
 
@@ -34,8 +34,8 @@ Route::get('/input-email',[UserController::class,'getInputEmail'])->name('getInp
 Route::post('/input-email',[UserController::class,'postInputEmail'])->name('postInputEmail');
 
 
-Route::get('/input-lienhe',[LienheController::class,'getInputLienhe'])->name('getInputLienhe');
-Route::post('/input-lienhe',[LienheController::class,'postInputLienhe'])->name('postInputLienhe');
+Route::get('/contact', [LienheController::class,'lienhe'])->name('lienhe'); // Hiển thị form liên hệ
+Route::post('/contact', [LienheController::class,'postContact'])->name('postLienhe'); // Xử lý dữ liệu gửi từ form liên hệ
 
 
 

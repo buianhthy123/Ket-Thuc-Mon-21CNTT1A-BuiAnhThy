@@ -84,8 +84,29 @@ class SpController extends Controller
 
         return redirect()->route('cart')->with('success', 'Xóa sản phẩm khỏi giỏ hàng thành công');
     }
-    public function getCheckout(){
-        return view('checkout');
+    public function getCheckout()
+    {
+        if (Session::has('cart')) {
+            $cart = Session::get('cart'); // Lấy giỏ hàng từ Session
+
+        // Tạo một mảng chứa danh sách sản phẩm và giá tiền
+        $cartItems = [];
+
+        // Duyệt qua các sản phẩm trong giỏ hàng và thêm vào mảng
+        foreach ($cart->items as $id => $product) {
+            $cartItems[] = [
+                'name' => $product['name'], // Tên sản phẩm
+                'price' => $product['price'] // Giá tiền
+            ];
+        }
+       
+        // Tính tổng tiền
+        $totalPrice = $cart->totalPrice;
+        return view('checkout', compact('cartItems', 'totalPrice'));
+    } else {
+        // Xử lý khi Session giỏ hàng không tồn tại
+        return redirect()->route('trangchu.trangchu')->with('success', 'Đặt hàng thành công');
+    }
     }
     public function postCheckout(Request $request)
     {
@@ -119,12 +140,15 @@ class SpController extends Controller
             $bill_detail->save();
         }
 
+        
         Session::forget('cart');
         return redirect()->back()->with('success', 'Đặt hàng thành công');
     }  else {
         // Giỏ hàng trống, hiển thị thông báo lỗi trực tiếp trên trang hiện tại
         return redirect()->route('trangchu.trangchu')->with('success', 'Đặt hàng thành công');
     }
+
+
     }
 
 

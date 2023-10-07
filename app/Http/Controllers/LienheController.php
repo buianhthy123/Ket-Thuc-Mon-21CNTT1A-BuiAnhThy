@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lienhe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\LienheMail;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Session;
 
 class LienheController extends Controller
@@ -49,60 +49,38 @@ class LienheController extends Controller
         $lienhes->delete();
         return redirect()->route('admin.getLienheList')->with('success','Bạn đã xóa thành công!');
     }
-     public function getInputLienhe(){
-        return view('lienhe.lienhe');
+    public function lienhe()
+    {
+        return view('lienhe');
     }
+    public function postContact(Request $req)
+    {
+        // Xác thực dữ liệu từ form nếu cần
 
-    public function postInputLienhe(Request $req){
-        $name=$req->name;
-        $mota=$req->mota;
-        $phone_number=$req->phone_number;
-        $email=$req->email;
-        $lienhes = new Lienhe();
-
-        //validate
-
-        // kiểm tra có user có email như vậy không
-        //dd($user);
-        if($mota != '' && $phone_number != '' && $email != '' && $name != ''){
-            //gửi mật khẩu reset tới email
-        //   dd($mota != '' && $phone_number != '' && $email != '');
-            $lienheData = [
-                'name' => $name,
-                'email' => $email,
-                'phone_number' => $phone_number,
-                'mota' => $mota,
-            ];
-           
-            Mail::to('buianhthy123@gmail.com')->send(new LienheMail($lienheData));
-            Session::flash('message', 'Cảm ơn bạn đã liên hệ !');
-                //
-            $this->validate(
-                $req,
-                [ 'name' => 'required',
-                'mota' => 'required',
-                'phone_number' => 'required',
-                'email' => 'required',
-                ],[
-                        'name.required' => 'Bạn chưa nhập tên',
-                        'mota.required' => 'Bạn chưa nhập mô tả',
-                        'phone_number.required' => 'Bạn chưa nhập số điện thoại',
-                        'email.required' => 'Bạn chưa email',
-                ]);
-                    
-                $lienhes->name = $req->name;
-                $lienhes->mota = $req->mota;
-                $lienhes->phone_number = $req->phone_number;
-                $lienhes->email = $req->email;
-                $lienhes->save();
-
-                return view('lienhe.ttlienhe');  //về lại trang đăng nhập của khách
-        }
-        else {
-        //    dd($mota != '' && $phone_number != '' && $email != '');
-              return redirect()->route('getInputEmail')->with('message','Your email is not right');
-        }
+        // Lấy dữ liệu từ form
+        $sentData = [
+        'name' => $req->input('name'),
+        'email' => $req->input('email'),
+        'phone_number' => $req->input('phone_number'),
+        'mota' => $req->input('mota'),
+    ];
+        // Gửi email cho bạn
+        Mail::to('buianhthy123@gmail.com')->send(new ContactMail($sentData));
         
-    }//hết postInputEmail
+        //
+        
+
+        $lienhe = new Lienhe();
+        $lienhe->name = $req->name;
+        $lienhe->email = $req->email;
+        $lienhe->phone_number = $req->phone_number;
+        $lienhe->mota = $req->mota;
+        $lienhe->save();
+
+
+        // Chuyển hướng hoặc hiển thị thông báo thành công
+        return redirect()->route('lienhe')->with('message', 'Gửi email thành công!');
+
+    }
 
 }
