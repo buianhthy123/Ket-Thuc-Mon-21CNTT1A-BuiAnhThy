@@ -50,7 +50,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="button" class="btn btn-primary">Đăng xuất</button>
+                            <form method="GET" action="{{route('admin.getLogout')}}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -90,7 +93,7 @@
                 <input type="file" class="form-control-file" name="image" id="" onchange="previewImage(this);" />
                 Hình ảnh trước khi đổi: <img src="{{ asset('/source/image/sanpham/'.$loaisps[0]->image) }}" width="200" height="100" class="img-thumbnail" /> Hình ảnh sau khi đổi:<img id="preview" width="200" height="100" class="img-thumbnail" />
             </div>
-            <button type="submit" class="btn btn-primary">Sửa sản phẩm</button>
+            <button type="submit" class="btn btn-primary">Sửa loại sản phẩm</button>
         </form>
         @endisset
     </div>

@@ -50,7 +50,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="button" class="btn btn-primary">Đăng xuất</button>
+                            <form method="GET" action="{{route('admin.getLogout')}}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -98,7 +101,7 @@
                 <label for="">Note</label>
                 <input type="text" class="form-control" id="name" value="{{isset($customers[0]->note)?$customers[0]->note:''}}" name="note" />
             </div>
-            <button type="submit" class="btn btn-primary">Sửa sản phẩm</button>
+            <button type="submit" class="btn btn-primary">Sửa Customers</button>
         </form>
     </div>
     @endsection

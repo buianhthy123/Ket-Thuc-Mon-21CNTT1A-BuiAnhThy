@@ -15,7 +15,7 @@
       <div class="list-group list-group-flush">
         <ul>
           <li>
-            <a href="{{ route('admin.getCateList') }}" class="list-group-item list-group-item-action  active"> Quản lý sản phẩm </a>
+            <a href="{{ route('admin.getCateList') }}" class="list-group-item list-group-item-action"> Quản lý sản phẩm </a>
           </li>
           <li>
             <a href="{{ route('admin.getCustomersList') }}" class="list-group-item list-group-item-action   ">

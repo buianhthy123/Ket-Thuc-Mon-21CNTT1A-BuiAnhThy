@@ -9,6 +9,7 @@
   <meta name="author" content="" />
 
   <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.4-web/css/all.min.css">

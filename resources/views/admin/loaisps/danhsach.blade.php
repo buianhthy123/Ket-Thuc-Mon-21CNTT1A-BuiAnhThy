@@ -50,7 +50,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="button" class="btn btn-primary">Đăng xuất</button>
+                            <form method="GET" action="{{route('admin.getLogout')}}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                            </form>
                         </div>
                     </div>
                 </div>
